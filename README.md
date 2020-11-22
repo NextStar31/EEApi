@@ -1,1 +1,1 @@
-An app demonstrating simple API implementation with NodeJs, Express and MongoDb
+RESTFul API implementation for EEApp using NodeJs, Express and MongoDb
