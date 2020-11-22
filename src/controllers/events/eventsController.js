@@ -15,6 +15,15 @@ exports.index = function (req, res) {
         return {
           id: x.id,
           date: x.date,
+          start: x.start,
+          end: x.end,
+          eventDay: x.eventDay,
+          title: x.title,
+          theme: x.theme,
+          desciption: x.desciption,
+          uri: x.uri,
+          speakers: x.speakers,
+          isSpecialEvent: x.isSpecialEvent,
         };
       }),
     });
@@ -23,47 +32,77 @@ exports.index = function (req, res) {
 
 exports.update = function (req, res) {
   console.log(req.body);
-  Event.findById(req.params.coin_id, function (err, event) {
+  Event.findById(req.params.id, function (err, event) {
     if (err) res.send(err);
-   
+    const data = req.body;
+    event.date = data.date;
+    event.start = data.start;
+    event.end = data.end;
+    event.eventDay = data.eventDay;
+    event.title = data.title;
+    event.theme = data.theme;
+    event.desciption = data.desciption;
+    event.uri = data.uri;
+    event.speakers = data.speakers;
+    event.isSpecialEvent = data.isSpecialEvent;
+
     event.save(function (err) {
       if (err) res.json(err);
       res.json({
         status: "success",
         data: {
-          id: event.id,
-          date: event.date,
+          id: data.id,
+          date: data.date,
+          start: data.start,
+          end: data.end,
+          eventDay: data.eventDay,
+          title: data.title,
+          theme: data.theme,
+          desciption: data.desciption,
+          uri: data.uri,
+          speakers: data.speakers,
+          isSpecialEvent: data.isSpecialEvent,
         },
       });
     });
   });
 };
 
-
 exports.add = function (req, res) {
-    var event = new Event();
-    event.name = req.body.name ;
+  var event = new Event();
+  const data = req.body;
+  event.date = data.date;
+  event.start = data.start;
+  event.end = data.end;
+  event.eventDay = data.eventDay;
+  event.title = data.title;
+  event.theme = data.theme;
+  event.desciption = data.desciption;
+  event.uri = data.uri;
+  event.speakers = data.speakers;
+  event.isSpecialEvent = data.isSpecialEvent;
 
-    contact.save(function (err) {
-        if (err)
-            res.json(err);
-        else
-            res.json({
-                message: 'New contact created!',
-                data: contact
-            });
-    });
+  contact.save(function (err) {
+    if (err) res.json(err);
+    else
+      res.json({
+        message: "New event created!",
+        data: event,
+      });
+  });
 };
 
 exports.delete = function (req, res) {
-    Event.remove({
-        _id: req.params.id
-    }, function (err, event) {
-        if (err)
-            res.send(err);
-        res.json({
-            status: "success",
-            message: 'Event deleted'
-        });
-    });
+  Event.remove(
+    {
+      _id: req.params.id,
+    },
+    function (err, event) {
+      if (err) res.send(err);
+      res.json({
+        status: "success",
+        message: "Event deleted",
+      });
+    }
+  );
 };
