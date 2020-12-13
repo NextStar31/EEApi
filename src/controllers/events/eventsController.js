@@ -9,15 +9,17 @@ exports.index = function (req, res) {
       });
     }
 
+    const sortedEvents = events.slice().sort((a, b) => a.date - b.date);
+    const filteredEvents = sortedEvents.filter(event => event.date > Date.now());
+
     res.json({
       status: "success",
-      data: events.map((x) => {
+      data: filteredEvents.map((x) => {
         return {
           id: x.id,
           date: x.date,
           start: x.start,
           end: x.end,
-          eventDay: x.eventDay,
           title: x.title,
           theme: x.theme,
           desciption: x.desciption,

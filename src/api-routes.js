@@ -19,11 +19,5 @@ router
   .delete(eventsController.delete)
   .patch(eventsController.update);
 
-router.route("/total").get(totalController.index);
-
-router.route("/users").get(userController.index);
-
-router.route("/stocks").get(stocksController.index);
-
 // Export API routes
 module.exports = router;

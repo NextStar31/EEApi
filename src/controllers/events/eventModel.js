@@ -2,15 +2,12 @@ var mongoose = require("mongoose");
 // Setup schema
 var eventSchema = mongoose.Schema({
   date: {
-    type: String,
+    type: Date,
   },
   start: {
     type: String,
   },
   end: {
-    type: String,
-  },
-  eventDay: {
     type: String,
   },
   title: {
